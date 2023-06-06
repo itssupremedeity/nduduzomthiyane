@@ -24,7 +24,6 @@ public class ImagesDB implements FileParser{
 
 
     public ImagesDB(){
-
         try {
             conn = DriverManager.getConnection(jdbcURL);
             System.out.println("Connected to database!!!");
@@ -34,21 +33,20 @@ public class ImagesDB implements FileParser{
         }
     }
 
+
     @Override
     public void parseCSV(File csvFile) {
-
         try (final LineNumberReader in = new LineNumberReader(new FileReader(csvFile))) {
-            in.readLine(); // get rid of the header line
+            in.readLine();
             images = parseDataLines(in);
-            //in.getLineNumber();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     @Override
     public File convertCSVDataToImage(Img base64ImageData) {
-
         byte[] data = Base64.getDecoder().decode(base64ImageData.getImgEncode());
         String outPutFile = "imagesDB/" +
                 base64ImageData.getName() + base64ImageData.getImgFormat();
@@ -65,10 +63,12 @@ public class ImagesDB implements FileParser{
         return null;
     }
 
+
     @Override
     public URI createImageLink(File fileImage) throws URISyntaxException, MalformedURLException {
         return fileImage.toURI();
     }
+
 
     private void createTable() {
         try( final Statement stmt = conn.createStatement() ){
@@ -83,6 +83,7 @@ public class ImagesDB implements FileParser{
         }
     }
 
+
     Set<Img> parseDataLines(final LineNumberReader in) {
         return in.lines()
                .map(this::splitLineIntoValues)
@@ -91,9 +92,11 @@ public class ImagesDB implements FileParser{
                .collect(Collectors.toSet());
     }
 
+
     String[] splitLineIntoValues(String aCsvLine) {
         return aCsvLine.trim().split(",");
     }
+
 
     private static final Set<String> NOT_WANTED_FEATURES = Set.of(
             "name".toLowerCase(),
@@ -106,10 +109,12 @@ public class ImagesDB implements FileParser{
         return !NOT_WANTED_FEATURES.contains(csvValue[IMAGE_DATA_COLUMN].toLowerCase());
     }
 
+
     Img asImg(String[] values) {
         return new Img(values[NAME_COLUMN], values[SURNAME_COLUMN],
                     values[IMAGE_FORMAT_COLUMN], values[IMAGE_DATA_COLUMN]);
     }
+
 
     public void insertIntoDB() throws URISyntaxException {
         for(Img image : images){
