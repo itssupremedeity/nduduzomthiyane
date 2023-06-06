@@ -1,5 +1,6 @@
 package com.eviro.assessment.grad001.nduduzomthiyane;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -72,3 +73,5 @@ public class ImageController {
                 .body(exception.getMessage());
     }
 }
+
+

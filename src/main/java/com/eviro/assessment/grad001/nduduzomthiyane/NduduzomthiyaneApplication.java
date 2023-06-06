@@ -3,7 +3,7 @@ package com.eviro.assessment.grad001.nduduzomthiyane;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.File;
-import java.net.URISyntaxException;
+
 
 @SpringBootApplication
 public class NduduzomthiyaneApplication {
