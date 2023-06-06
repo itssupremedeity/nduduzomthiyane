@@ -14,5 +14,4 @@ public class ErrorControl implements ErrorController {
         return "THE REQUESTED URL IS NOT PART OF OUR " +
                 "SCHEMA, PLEASE INPUT A PROPER URL";
     }
-
 }
