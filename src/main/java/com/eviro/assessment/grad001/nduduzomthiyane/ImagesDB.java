@@ -132,6 +132,7 @@ public class ImagesDB implements FileParser{
                 System.out.println(createImageLink(file).toString());
         } catch (SQLException | MalformedURLException e) {
                 throw new RuntimeException(e);
+                //ffff
             }
         }
     }
