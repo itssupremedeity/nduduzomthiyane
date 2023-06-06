@@ -121,8 +121,8 @@ public class ImagesDB implements FileParser{
             try( final Statement stmt = conn.createStatement() ){
 
                 stmt.executeUpdate( "INSERT INTO account_profile (name,surname,httpImgLink)" +
-                        " VALUES ('" + image.getName() + "','" +
-                        image.getSurname() + "','" +
+                        " VALUES ('" + image.getName().toLowerCase() + "','" +
+                        image.getSurname().toLowerCase() + "','" +
                         createImageLink(file).toString() + "');");
                 System.out.println(createImageLink(file).toString());
         } catch (SQLException | MalformedURLException e) {

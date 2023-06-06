@@ -23,7 +23,7 @@ public class ImageController {
     @GetMapping(value = "/{name}")
     public ResponseEntity<FileSystemResource> getHttpImgLink(@PathVariable String name) throws SQLException, IOException {
 
-        URL url1 = new URL(persistDatabase(name));
+        URL url1 = new URL(persistDatabase(name.toLowerCase()));
 
         FileSystemResource resource =
                 new FileSystemResource(url1.getPath());
