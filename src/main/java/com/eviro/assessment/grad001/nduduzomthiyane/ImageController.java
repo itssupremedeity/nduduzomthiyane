@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 
 
@@ -22,9 +23,13 @@ public class ImageController {
     @GetMapping(value = "/{name}")
     public ResponseEntity<FileSystemResource> getHttpImgLink(@PathVariable String name) throws SQLException, IOException {
 
+        URL url1 = new URL(persistDatabase(name));
+
         FileSystemResource resource =
-                new FileSystemResource("/home/ndu/Documents/nduduzomthiyane/imagesDB/Momentum.png");
+                new FileSystemResource(url1.getPath());
         HttpHeaders headers = new HttpHeaders();
+
+
         headers.setContentType(MediaType.IMAGE_PNG);
         headers.setContentLength(resource.contentLength());
 
