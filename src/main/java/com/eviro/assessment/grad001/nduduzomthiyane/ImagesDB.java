@@ -55,16 +55,13 @@ public class ImagesDB implements FileParser{
 
         System.out.println("processing image");
 
-        try( OutputStream stream = new FileOutputStream(outPutFile))
-        {
+        try( OutputStream stream = new FileOutputStream(outPutFile)) {
             stream.write(data);
             return new File(outPutFile);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.err.println("Couldn't write to file...");
         }
-
         return null;
     }
 
@@ -117,17 +114,13 @@ public class ImagesDB implements FileParser{
     public void insertIntoDB() throws URISyntaxException {
         for(Img image : images){
             File file = convertCSVDataToImage(image);
-
             try( final Statement stmt = conn.createStatement() ){
-
                 stmt.executeUpdate( "INSERT INTO account_profile (name,surname,httpImgLink)" +
                         " VALUES ('" + image.getName().toLowerCase() + "','" +
                         image.getSurname().toLowerCase() + "','" +
                         createImageLink(file).toString() + "');");
-                System.out.println(createImageLink(file).toString());
         } catch (SQLException | MalformedURLException e) {
                 throw new RuntimeException(e);
-                //ffff
             }
         }
     }

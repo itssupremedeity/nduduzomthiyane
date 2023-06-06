@@ -2,8 +2,6 @@ package com.eviro.assessment.grad001.nduduzomthiyane;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.print.DocFlavor;
 import java.io.File;
 import java.net.URISyntaxException;
 
@@ -21,5 +19,4 @@ public class NduduzomthiyaneApplication {
 		imgDB.insertIntoDB();
 		SpringApplication.run(NduduzomthiyaneApplication.class, args);
 	}
-
 }
