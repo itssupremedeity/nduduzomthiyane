@@ -70,12 +70,7 @@ public class ImagesDB implements FileParser{
 
     @Override
     public URI createImageLink(File fileImage) throws URISyntaxException, MalformedURLException {
-        String protocol = "http";
-        String host = "IP";
-        int port = 8080;
-        String path = "/"+fileImage.getPath();
-        URL url = new URL(protocol, host, port, path);
-        return url.toURI();
+        return fileImage.toURI();
     }
 
     private void createTable() {
