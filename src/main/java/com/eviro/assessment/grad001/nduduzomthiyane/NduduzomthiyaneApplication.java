@@ -19,7 +19,7 @@ public class NduduzomthiyaneApplication {
 		imgDB = new ImagesDB();
 		imgDB.parseCSV(dataFile);
 		imgDB.insertIntoDB();
-		//SpringApplication.run(NduduzomthiyaneApplication.class, args);
+		SpringApplication.run(NduduzomthiyaneApplication.class, args);
 	}
 
 }
