@@ -7,12 +7,11 @@ import java.net.URISyntaxException;
 
 @SpringBootApplication
 public class NduduzomthiyaneApplication {
-
 	private static String dataDir = "1672815113084-GraduateDev_AssessmentCsv_Ref003.csv";
 	private static File dataFile;
 	private static ImagesDB imgDB;
 
-	public static void main(String[] args) throws URISyntaxException {
+	public static void main(String[] args) {
 		dataFile = new File(dataDir);
 		imgDB = new ImagesDB();
 		imgDB.parseCSV(dataFile);

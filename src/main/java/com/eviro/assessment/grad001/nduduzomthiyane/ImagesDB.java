@@ -65,7 +65,7 @@ public class ImagesDB implements FileParser{
 
 
     @Override
-    public URI createImageLink(File fileImage) throws URISyntaxException, MalformedURLException {
+    public URI createImageLink(File fileImage) throws MalformedURLException {
         return fileImage.toURI();
     }
 
@@ -116,7 +116,7 @@ public class ImagesDB implements FileParser{
     }
 
 
-    public void insertIntoDB() throws URISyntaxException {
+    public void insertIntoDB() {
         for(Img image : images){
             File file = convertCSVDataToImage(image);
             try( final Statement stmt = conn.createStatement() ){

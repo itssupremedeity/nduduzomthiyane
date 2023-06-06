@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -19,20 +20,27 @@ public class ImageController {
     Connection conn;
 
     @GetMapping(value = "/{name}/{surname}")
-    public ResponseEntity<FileSystemResource> getHttpImgLink(@PathVariable String name,
+    public ResponseEntity<Object> getHttpImgLink(@PathVariable String name,
                                                              @PathVariable String surname)
                                                             throws SQLException, IOException {
 
-        URL url1 = new URL(persistDatabase(name.toLowerCase(),surname.toLowerCase()));
+        String queryingDatabase = persistDatabase(name.toLowerCase(),surname.toLowerCase());
 
-        FileSystemResource resource =
-                new FileSystemResource(url1.getPath());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_PNG);
-        headers.setContentLength(resource.contentLength());
+        if(queryingDatabase != null){
+            URL url1 = new URL(queryingDatabase);
 
-        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+            FileSystemResource resource =
+                    new FileSystemResource(url1.getPath());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.setContentLength(resource.contentLength());
 
+            return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+
+        } else {
+            return handleNoSuchElementFoundException(
+                    new NoSuchElementException("REQUESTED ITEM CANNOT BE FOUND ON OUR DATABASE" ));
+        }
     }
 
     private String persistDatabase(String name,String surname) throws SQLException {
@@ -44,7 +52,7 @@ public class ImageController {
                             "AND surname = '" + surname + "';"
             );
             if( ! gotAResultSet ){
-                throw new RuntimeException( "Expected a SQL resultset, but we got an update count instead!" );
+                System.out.println("REQUESTED ITEM CANNOT BE FOUND ON OUR DATABASE" );
             }
             try( ResultSet results = stmt.getResultSet() ){
                 while( results.next() ){
@@ -53,5 +61,14 @@ public class ImageController {
             }
         }
         return null;
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleNoSuchElementFoundException(
+            NoSuchElementException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
     }
 }
