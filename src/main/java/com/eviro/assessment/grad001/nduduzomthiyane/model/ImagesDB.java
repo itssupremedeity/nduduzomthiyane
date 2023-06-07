@@ -1,7 +1,7 @@
 package com.eviro.assessment.grad001.nduduzomthiyane.model;
 
+
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.sql.*;
 import java.util.Base64;
@@ -20,13 +20,8 @@ public class ImagesDB implements FileParser {
     static final int IMAGE_DATA_COLUMN = 3;
 
 
-    public ImagesDB(){
-        try {
-            conn = DriverManager.getConnection(jdbcURL,"sa","");
-            System.out.println("Connected to database!!!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public ImagesDB(File csvFile){
+        parseCSV(csvFile);
     }
 
 
@@ -45,7 +40,8 @@ public class ImagesDB implements FileParser {
     public File convertCSVDataToImage(Img base64ImageData) {
         byte[] data = Base64.getDecoder().decode(base64ImageData.getImgEncode());
         String outPutFile = "imagesDB/" +
-                base64ImageData.getName() + base64ImageData.getImgFormat();
+                base64ImageData.getName() +
+                base64ImageData.getImgFormat();
 
         System.out.println("processing image");
 
@@ -61,7 +57,7 @@ public class ImagesDB implements FileParser {
 
 
     @Override
-    public URI createImageLink(File fileImage) throws MalformedURLException {
+    public URI createImageLink(File fileImage) {
         return fileImage.toURI();
     }
 
@@ -93,7 +89,6 @@ public class ImagesDB implements FileParser {
 
 
     Img asImg(String[] values) {
-
         return new Img(values[NAME_COLUMN], values[SURNAME_COLUMN],
                     values[IMAGE_FORMAT_COLUMN], values[IMAGE_DATA_COLUMN]);
     }
@@ -107,7 +102,7 @@ public class ImagesDB implements FileParser {
                         " VALUES ('" + image.getName().toLowerCase() + "','" +
                         image.getSurname().toLowerCase() + "','" +
                         createImageLink(file).toString() + "');");
-        } catch (SQLException | MalformedURLException e) {
+        } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }

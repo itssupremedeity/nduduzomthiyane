@@ -20,6 +20,8 @@ public class ImageController {
     String jdbcURL = "jdbc:h2:mem:images_db";
     Connection conn;
 
+
+
     @GetMapping(value = "/{name}/{surname}")
     public ResponseEntity<Object> getHttpImgLink(@PathVariable String name,
                                                              @PathVariable String surname)
