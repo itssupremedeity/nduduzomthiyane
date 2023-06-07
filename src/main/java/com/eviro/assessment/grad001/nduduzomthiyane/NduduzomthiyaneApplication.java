@@ -12,10 +12,10 @@ public class NduduzomthiyaneApplication {
 	private static ImagesDB imgDB;
 
 	public static void main(String[] args) {
+		SpringApplication.run(NduduzomthiyaneApplication.class, args);
 		dataFile = new File(dataDir);
 		imgDB = new ImagesDB();
 		imgDB.parseCSV(dataFile);
 		imgDB.insertIntoDB();
-		SpringApplication.run(NduduzomthiyaneApplication.class, args);
 	}
 }

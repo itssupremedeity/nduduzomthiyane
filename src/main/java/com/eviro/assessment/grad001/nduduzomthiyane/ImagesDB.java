@@ -25,9 +25,8 @@ public class ImagesDB implements FileParser{
 
     public ImagesDB(){
         try {
-            conn = DriverManager.getConnection(jdbcURL);
+            conn = DriverManager.getConnection(jdbcURL,"sa","");
             System.out.println("Connected to database!!!");
-            createTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,20 +66,6 @@ public class ImagesDB implements FileParser{
     @Override
     public URI createImageLink(File fileImage) throws MalformedURLException {
         return fileImage.toURI();
-    }
-
-
-    private void createTable() {
-        try( final Statement stmt = conn.createStatement() ){
-            stmt.executeUpdate( "CREATE TABLE account_profile(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT," +
-                    "name VARCHAR(100)," +
-                    "surname VARCHAR(100)," +
-                    "httpImgLink TEXT);" );
-            System.out.println( "Success creating profile table!" );
-        }catch( SQLException e ){
-            System.err.println( e.getMessage() );
-        }
     }
 
 
