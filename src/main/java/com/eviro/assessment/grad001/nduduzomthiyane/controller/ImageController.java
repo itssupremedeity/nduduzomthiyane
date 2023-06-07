@@ -21,7 +21,12 @@ public class ImageController {
     Connection conn;
 
 
-
+    /**
+     * processes the REST end point to get information from URL and processes it to query d
+     * database and returns the required result
+     * @param  name name from URL
+     * @param  surname surname from URL
+     */
     @GetMapping(value = "/{name}/{surname}")
     public ResponseEntity<Object> getHttpImgLink(@PathVariable String name,
                                                              @PathVariable String surname)
@@ -46,6 +51,12 @@ public class ImageController {
         }
     }
 
+    /**
+     * persisting the database based on name and surname passed through the REST endpoint and
+     * returning the result set from the database
+     * @param  name name from URL
+     * @param  surname surname from URL
+     */
     private String persistDatabase(String name,String surname) throws SQLException {
         conn = DriverManager.getConnection(jdbcURL,"sa","");
         try( final Statement stmt = conn.createStatement() ){
