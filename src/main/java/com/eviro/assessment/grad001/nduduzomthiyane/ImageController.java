@@ -45,7 +45,7 @@ public class ImageController {
     }
 
     private String persistDatabase(String name,String surname) throws SQLException {
-        conn = DriverManager.getConnection(jdbcURL);
+        conn = DriverManager.getConnection(jdbcURL,"sa","");
         try( final Statement stmt = conn.createStatement() ){
             boolean gotAResultSet = stmt.execute(
                     "SELECT name, surname, httpImgLink FROM account_profile "
