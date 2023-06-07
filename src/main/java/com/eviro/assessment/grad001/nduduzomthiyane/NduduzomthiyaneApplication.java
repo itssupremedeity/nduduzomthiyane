@@ -1,5 +1,6 @@
 package com.eviro.assessment.grad001.nduduzomthiyane;
 
+import com.eviro.assessment.grad001.nduduzomthiyane.model.ImagesDB;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.File;

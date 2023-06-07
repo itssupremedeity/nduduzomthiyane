@@ -1,4 +1,4 @@
-package com.eviro.assessment.grad001.nduduzomthiyane;
+package com.eviro.assessment.grad001.nduduzomthiyane.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.core.io.FileSystemResource;
@@ -23,7 +23,7 @@ public class ImageController {
     @GetMapping(value = "/{name}/{surname}")
     public ResponseEntity<Object> getHttpImgLink(@PathVariable String name,
                                                              @PathVariable String surname)
-                                                            throws SQLException, IOException {
+                                                             throws SQLException, IOException {
 
         String queryingDatabase = persistDatabase(name.toLowerCase(),surname.toLowerCase());
 

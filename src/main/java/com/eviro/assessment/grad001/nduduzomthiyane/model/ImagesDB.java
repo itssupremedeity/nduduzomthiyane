@@ -1,18 +1,15 @@
-package com.eviro.assessment.grad001.nduduzomthiyane;
+package com.eviro.assessment.grad001.nduduzomthiyane.model;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.*;
 import java.util.Base64;
-import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 
-public class ImagesDB implements FileParser{
+public class ImagesDB implements FileParser {
 
     String jdbcURL = "jdbc:h2:mem:images_db";
     Connection conn;
@@ -96,6 +93,7 @@ public class ImagesDB implements FileParser{
 
 
     Img asImg(String[] values) {
+
         return new Img(values[NAME_COLUMN], values[SURNAME_COLUMN],
                     values[IMAGE_FORMAT_COLUMN], values[IMAGE_DATA_COLUMN]);
     }

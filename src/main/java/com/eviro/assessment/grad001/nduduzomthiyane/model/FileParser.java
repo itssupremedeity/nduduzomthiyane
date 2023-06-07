@@ -1,4 +1,6 @@
-package com.eviro.assessment.grad001.nduduzomthiyane;
+package com.eviro.assessment.grad001.nduduzomthiyane.model;
+
+import com.eviro.assessment.grad001.nduduzomthiyane.model.Img;
 
 import java.io.File;
 import java.net.MalformedURLException;

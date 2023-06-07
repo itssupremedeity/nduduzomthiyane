@@ -1,4 +1,4 @@
-package com.eviro.assessment.grad001.nduduzomthiyane;
+package com.eviro.assessment.grad001.nduduzomthiyane.model;
 
 public class Img {
 
