@@ -19,6 +19,8 @@ public class ImagesDB implements FileParser {
     static final int IMAGE_FORMAT_COLUMN = 2;
     static final int IMAGE_DATA_COLUMN = 3;
 
+    public ImagesDB() {
+    }
 
     /**
      * Constructor connects to an in memory database and also processes the csv file.
@@ -93,7 +95,7 @@ public class ImagesDB implements FileParser {
      *
      * @param  in all data present in our csv file
      */
-    Set<Img> parseDataLines(final LineNumberReader in) {
+    public Set<Img> parseDataLines(final LineNumberReader in) {
         return in.lines()
                .map(this::splitLineIntoValues)
                .filter(this::isLineAWantedFeature)
