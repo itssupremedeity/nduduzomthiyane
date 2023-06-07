@@ -20,6 +20,10 @@ public class ImagesDB implements FileParser {
     static final int IMAGE_DATA_COLUMN = 3;
 
 
+    /**
+     * Constructor connects to an in memory database and also processes the csv file.
+     * @param  csvFile a csv file
+     */
     public ImagesDB(File csvFile){
         try {
             conn = DriverManager.getConnection(jdbcURL,"sa","");
@@ -32,6 +36,10 @@ public class ImagesDB implements FileParser {
     }
 
 
+    /**
+     * processes the csv file
+     * @param  csvFile an csvfile
+     */
     @Override
     public void parseCSV(File csvFile) {
         try (final LineNumberReader in = new LineNumberReader(new FileReader(csvFile))) {
@@ -43,6 +51,10 @@ public class ImagesDB implements FileParser {
     }
 
 
+    /**
+     * Creates an images from the base64 encoding, and stores it in a file and returns it.
+     * @param  base64ImageData an image object containing information about the image
+     */
     @Override
     public File convertCSVDataToImage(Img base64ImageData) {
         byte[] data = Base64.getDecoder().decode(base64ImageData.getImgEncode());
@@ -63,12 +75,24 @@ public class ImagesDB implements FileParser {
     }
 
 
+
+    /**
+     * Returns an URI of a file datatype
+     *
+     * @param  fileImage  file
+     */
     @Override
     public URI createImageLink(File fileImage) {
         return fileImage.toURI();
     }
 
 
+    /**
+     * Returns an set Image
+     * process the csv file to return a set of required objects
+     *
+     * @param  in all data present in our csv file
+     */
     Set<Img> parseDataLines(final LineNumberReader in) {
         return in.lines()
                .map(this::splitLineIntoValues)
@@ -78,11 +102,20 @@ public class ImagesDB implements FileParser {
     }
 
 
+    /**
+     * Returns as String array
+     * split a string by a specified delimeter to an array
+     *
+     * @param  aCsvLine each line from our csv file
+     */
     String[] splitLineIntoValues(String aCsvLine) {
         return aCsvLine.trim().split(",");
     }
 
 
+    /**
+     * Sets of not wanted features from a csv file.
+     */
     private static final Set<String> NOT_WANTED_FEATURES = Set.of(
             "name".toLowerCase(),
             "surname".toLowerCase(),
@@ -90,17 +123,29 @@ public class ImagesDB implements FileParser {
             "imageData".toLowerCase());
 
 
+    /**
+     * Returns a boolean value if the lines passed contains wanted features
+     *
+     * @param  csvValue an array of values from each line of our csv file
+     */
     boolean isLineAWantedFeature(String[] csvValue) {
         return !NOT_WANTED_FEATURES.contains(csvValue[IMAGE_DATA_COLUMN].toLowerCase());
     }
 
-
+    /**
+     * Returns an Image object created from the csv file
+     *
+     * @param  values  array of values from each csv line
+     */
     Img asImg(String[] values) {
         return new Img(values[NAME_COLUMN], values[SURNAME_COLUMN],
                     values[IMAGE_FORMAT_COLUMN], values[IMAGE_DATA_COLUMN]);
     }
 
-
+    /**
+     * Inserting data to our database by looping through the stored image objects on our set
+     * and creating a statement to write a SQL code to execute on our stored database
+     */
     public void insertIntoDB() {
         for(Img image : images){
             File file = convertCSVDataToImage(image);
