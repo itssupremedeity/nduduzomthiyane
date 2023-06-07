@@ -1,13 +1,8 @@
 package com.eviro.assessment.grad001.nduduzomthiyane;
 
-import com.eviro.assessment.grad001.nduduzomthiyane.model.Imag;
 import com.eviro.assessment.grad001.nduduzomthiyane.model.ImagesDB;
-import com.eviro.assessment.grad001.nduduzomthiyane.repository.ImageRepo;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
 import java.io.File;
 
 
@@ -20,5 +15,4 @@ public class NduduzomthiyaneApplication {
 		SpringApplication.run(NduduzomthiyaneApplication.class, args);
 		imgDB = new ImagesDB(new File(dataDir));
 	}
-
 }

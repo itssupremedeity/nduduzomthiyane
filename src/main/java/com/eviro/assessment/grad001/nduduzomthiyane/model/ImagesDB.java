@@ -21,7 +21,14 @@ public class ImagesDB implements FileParser {
 
 
     public ImagesDB(File csvFile){
-        parseCSV(csvFile);
+        try {
+            conn = DriverManager.getConnection(jdbcURL,"sa","");
+            System.out.println("Connected to database!!!");
+            parseCSV(csvFile);
+            insertIntoDB();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
