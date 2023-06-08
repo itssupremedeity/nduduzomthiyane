@@ -6,7 +6,7 @@ public interface TestData {
             """
             name,surname,imageFormat,imageData
             Amatikulu,Station,image/jpg,-29.05111111
-            Amatikulu,Town,image/png,-29.04666667
-            Botrivier,Station,image/png,-34.22666667
+            Amatikulu,Station,image/png,-29.04666667
+            Amatikulu,Station,image/png,-34.22666667
             """ ;
 }
