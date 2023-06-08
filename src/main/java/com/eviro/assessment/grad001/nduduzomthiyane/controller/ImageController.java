@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
 @RequestMapping("/v1/api/image")
 public class ImageController {
 
-    String jdbcURL = "jdbc:h2:mem:images_db";
-    Connection conn;
+    static String jdbcURL = "jdbc:h2:mem:images_db";
+    static Connection conn;
 
 
     /**
@@ -57,7 +57,7 @@ public class ImageController {
      * @param  name name from URL
      * @param  surname surname from URL
      */
-    private String persistDatabase(String name,String surname) throws SQLException {
+    public static String persistDatabase(String name, String surname) throws SQLException {
         conn = DriverManager.getConnection(jdbcURL,"sa","");
         try( final Statement stmt = conn.createStatement() ){
             boolean gotAResultSet = stmt.execute(

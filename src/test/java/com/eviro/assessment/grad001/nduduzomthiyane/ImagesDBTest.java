@@ -27,12 +27,7 @@ public class ImagesDBTest {
         fakeImgData = parser.parseDataLines(input);
     }
 
-    @AfterEach
-    public void tearDown(){
-        fakeImgData = null;
-        parser = null;
-        input = null;
-    }
+
 
     @Test
     public void checkIfOurSetHasObjects() throws IOException {
