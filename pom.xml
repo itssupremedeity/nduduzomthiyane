@@ -34,6 +34,14 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.konghq</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>3.13.10</version>
+			<scope>test</scope>
+			<classifier>standalone</classifier>
+		</dependency>
+
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
